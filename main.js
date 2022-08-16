@@ -40,9 +40,10 @@ addBookToLibrary(theHobbit);
 const theGunslinger = new Book('The Gunslinger', 'Stephen King', 190, true);
 addBookToLibrary(theGunslinger);
 
-addLibraryToShelf();
+const braveNewWorld = new Book('Brave New World', 'Aldous Huxley', 311, true);
+addBookToLibrary(braveNewWorld);
 
-// const braveNewWorld = new Book('Brave New World', 'Aldous Huxley', 311, true);
-// addBookToLibrary(braveNewWorld);
-// const nineteenEightyFour = new Book('1984', 'George Orwell', 328, true);
-// addBookToLibrary(braveNewWorld);
+const nineteenEightyFour = new Book('1984', 'George Orwell', 328, true);
+addBookToLibrary(braveNewWorld);
+
+addLibraryToShelf();
