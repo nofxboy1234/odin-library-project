@@ -16,6 +16,20 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
+function addBookToShelf(book) {
+  const bookDiv = document.createElement('div');
+  bookDiv.classList.add('book-card');
+
+  const bookTitle = document.createElement('div');
+  bookTitle.textContent = book.title;
+  bookDiv.appendChild(bookTitle);
+  const bookAuthor = document.createElement('div');
+  bookAuthor.textContent = book.author;
+  bookDiv.appendChild(bookAuthor);
+
+  bookShelf.appendChild(bookDiv);
+}
+
 function showLibrary() {
   myLibrary.forEach((book) => console.log(book));
 }
@@ -24,24 +38,13 @@ const bookShelf = document.querySelector('#book-shelf');
 
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
 addBookToLibrary(theHobbit);
+addBookToShelf(theHobbit);
 
-const bookDiv = document.createElement('div');
-bookDiv.classList.add('book-card');
-
-const bookTitle = document.createElement('div');
-bookTitle.textContent = theHobbit.title;
-bookDiv.appendChild(bookTitle);
-const bookAuthor = document.createElement('div');
-bookAuthor.textContent = theHobbit.author;
-bookDiv.appendChild(bookAuthor);
-
-bookShelf.appendChild(bookDiv);
-
-const theGunslinger = new Book('The Gunslinger', 'Stephen King', 190, true);
-addBookToLibrary(theGunslinger);
-const braveNewWorld = new Book('Brave New World', 'Aldous Huxley', 311, true);
-addBookToLibrary(braveNewWorld);
-const nineteenEightyFour = new Book('1984', 'George Orwell', 328, true);
-addBookToLibrary(braveNewWorld);
+// const theGunslinger = new Book('The Gunslinger', 'Stephen King', 190, true);
+// addBookToLibrary(theGunslinger);
+// const braveNewWorld = new Book('Brave New World', 'Aldous Huxley', 311, true);
+// addBookToLibrary(braveNewWorld);
+// const nineteenEightyFour = new Book('1984', 'George Orwell', 328, true);
+// addBookToLibrary(braveNewWorld);
 
 showLibrary();
