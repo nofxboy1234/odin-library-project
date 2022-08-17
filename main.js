@@ -18,17 +18,17 @@ function addBookToLibrary(book) {
 
 function addLibraryToShelf() {
   myLibrary.forEach((book) => {
-    const bookDiv = document.createElement('div');
-    bookDiv.classList.add('book-card');
+    const bookCard = document.createElement('div');
+    bookCard.classList.add('book-card');
 
     const bookTitle = document.createElement('div');
     bookTitle.textContent = book.title;
-    bookDiv.appendChild(bookTitle);
+    bookCard.appendChild(bookTitle);
     const bookAuthor = document.createElement('div');
     bookAuthor.textContent = book.author;
-    bookDiv.appendChild(bookAuthor);
+    bookCard.appendChild(bookAuthor);
 
-    bookShelf.appendChild(bookDiv);
+    bookShelf.appendChild(bookCard);
   });
 }
 
