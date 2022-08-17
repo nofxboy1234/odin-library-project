@@ -44,6 +44,6 @@ const braveNewWorld = new Book('Brave New World', 'Aldous Huxley', 311, true);
 addBookToLibrary(braveNewWorld);
 
 const nineteenEightyFour = new Book('1984', 'George Orwell', 328, true);
-addBookToLibrary(braveNewWorld);
+addBookToLibrary(nineteenEightyFour);
 
 addLibraryToShelf();
