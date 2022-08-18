@@ -53,6 +53,7 @@ const trigger = document.querySelector('.trigger');
 const closeButton = document.querySelector('.close-button');
 
 function toggleModal() {
+  console.log('toggleModal');
   modal.classList.toggle('show-modal');
 }
 
