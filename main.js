@@ -59,6 +59,7 @@ function addBookToShelf(book) {
   const bookRead = document.createElement('input');
   bookRead.type = 'checkbox';
   bookRead.checked = book.read ? true : false;
+  bookRead.addEventListener('click', toggleReadStatus);
   bookCard.appendChild(bookRead);
 
   const removeBookButton = document.createElement('div');
@@ -126,21 +127,32 @@ function removeBook(event) {
   const bookCardToRemove = event.target.parentElement;
   removeBookFromShelf(bookCardToRemove);
   removeBookFromLibrary(bookCardToRemove);
-  console.log(myLibrary);
 }
 
 function bookExists(newBook) {
   let bookFound = false;
   myLibrary.forEach((book) => {
     if (book.title === newBook.title && book.author === newBook.author) {
-      console.log('found book');
       bookFound = true;
     }
   });
   return bookFound;
 }
 
-function toggleReadStatus(book) {}
+function toggleReadStatus(event) {
+  const bookCardToToggleRead = event.target.parentElement;
+
+  const toggleReadTitle =
+    bookCardToToggleRead.querySelector('.book-card-title').textContent;
+  const toggleReadAuthor =
+    bookCardToToggleRead.querySelector('.book-card-author').textContent;
+
+  myLibrary.forEach((book) => {
+    if (book.title === toggleReadTitle && book.author === toggleReadAuthor) {
+      book.read = !book.read;
+    }
+  });
+}
 
 const bookShelf = document.querySelector('#book-shelf');
 
@@ -180,7 +192,6 @@ addButton.addEventListener('click', () => {
   if (!bookExists(newBook)) {
     addBookToLibrary(newBook);
     addBookToShelf(newBook);
-    console.log(myLibrary);
     toggleModal();
   } else {
     alert('Book already exists in library');
@@ -191,5 +202,3 @@ const removeButtons = document.querySelectorAll('.remove-button');
 removeButtons.forEach((button) => {
   button.addEventListener('click', removeBook);
 });
-
-console.log(myLibrary);
