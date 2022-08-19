@@ -18,17 +18,19 @@ function addBookToLibrary(book) {
 
 function addLibraryToShelf() {
   myLibrary.forEach((book) => {
-    const bookCard = document.createElement('div');
-    bookCard.classList.add('book-card');
+    // const bookCard = document.createElement('div');
+    // bookCard.classList.add('book-card');
 
-    const bookTitle = document.createElement('div');
-    bookTitle.textContent = book.title;
-    bookCard.appendChild(bookTitle);
-    const bookAuthor = document.createElement('div');
-    bookAuthor.textContent = book.author;
-    bookCard.appendChild(bookAuthor);
+    // const bookTitle = document.createElement('div');
+    // bookTitle.textContent = book.title;
+    // bookCard.appendChild(bookTitle);
+    // const bookAuthor = document.createElement('div');
+    // bookAuthor.textContent = book.author;
+    // bookCard.appendChild(bookAuthor);
 
-    bookShelf.appendChild(bookCard);
+    // bookShelf.appendChild(bookCard);
+
+    addBookToShelf(book);
   });
 }
 
@@ -59,7 +61,7 @@ function addBookToShelf(book) {
 function resetForm() {
   titleInput.value = '';
   authorInput.value = '';
-  pagesInput.value = '';
+  pagesInput.value = '1';
   readInput.checked = false;
 }
 
@@ -113,6 +115,16 @@ addButton.addEventListener('click', () => {
   const author = authorInput.value;
   const pages = pagesInput.value;
   const read = readInput.checked;
+
+  if (title === '' || title === ' ') {
+    alert('Please enter a title');
+    return;
+  }
+
+  if (author === '' || author === ' ') {
+    alert('Please enter an author');
+    return;
+  }
 
   const newBook = new Book(title, author, pages, read);
   addBookToLibrary(newBook);
