@@ -29,9 +29,11 @@ function addBookToShelf(book) {
   bookCard.dataset.bookIndex = book.bookIndex;
 
   const bookTitle = document.createElement('div');
+  bookTitle.classList.add('book-card-title');
   bookTitle.textContent = book.title;
   bookCard.appendChild(bookTitle);
   const bookAuthor = document.createElement('div');
+  bookAuthor.classList.add('book-card-author');
   bookAuthor.textContent = book.author;
   bookCard.appendChild(bookAuthor);
   const bookPages = document.createElement('div');
@@ -86,8 +88,17 @@ function addInitialBooks() {
   addLibraryToShelf();
 }
 
-function removeBookFromLibrary(bookIndex) {
-  myLibrary.splice(bookIndex, 1);
+function removeBookFromLibrary(bookCardToRemove) {
+  const removeTitle =
+    bookCardToRemove.querySelector('.book-card-title').textContent;
+  const removeAuthor =
+    bookCardToRemove.querySelector('.book-card-author').textContent;
+
+  myLibrary.forEach((book) => {
+    if (book.title === removeTitle && book.author === removeAuthor) {
+      myLibrary.splice(myLibrary.indexOf(book), 1);
+    }
+  });
 }
 
 function removeBookFromShelf(bookCardToRemove) {
@@ -96,9 +107,8 @@ function removeBookFromShelf(bookCardToRemove) {
 
 function removeBook(event) {
   const bookCardToRemove = event.target.parentElement;
-  const bookIndex = bookCardToRemove.dataset.bookIndex;
-  removeBookFromLibrary(bookIndex);
   removeBookFromShelf(bookCardToRemove);
+  removeBookFromLibrary(bookCardToRemove);
 }
 
 const bookShelf = document.querySelector('#book-shelf');
