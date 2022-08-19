@@ -37,9 +37,12 @@ function addBookToShelf(book) {
   const bookPages = document.createElement('div');
   bookPages.textContent = book.pages;
   bookCard.appendChild(bookPages);
-  const bookRead = document.createElement('div');
-  bookRead.textContent = book.read ? 'Has been read' : 'Not read';
+
+  const bookRead = document.createElement('input');
+  bookRead.type = 'checkbox';
+  bookRead.checked = book.read ? true : false;
   bookCard.appendChild(bookRead);
+
   const removeBookButton = document.createElement('div');
   removeBookButton.classList.add('remove-button');
   removeBookButton.addEventListener('click', removeBook);
@@ -111,14 +114,6 @@ function removeBook(event) {
 function bookExists(newBook) {
   let bookFound = false;
   myLibrary.forEach((book) => {
-    // console.log(typeof book.title);
-    // console.log(typeof newBook.title);
-
-    // console.log(`book.title: ${book.title}`);
-    // console.log(`newBook.title: ${newBook.title}`);
-    // console.log(`book.author: ${book.author}`);
-    // console.log(`newBook.author: ${newBook.author}`);
-
     if (book.title === newBook.title && book.author === newBook.author) {
       console.log('found book');
       bookFound = true;
@@ -126,6 +121,8 @@ function bookExists(newBook) {
   });
   return bookFound;
 }
+
+function toggleReadStatus(book) {}
 
 const bookShelf = document.querySelector('#book-shelf');
 
