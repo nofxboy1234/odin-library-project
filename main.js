@@ -42,6 +42,16 @@ function addBookToShelf(book) {
   const bookAuthor = document.createElement('div');
   bookAuthor.textContent = book.author;
   bookCard.appendChild(bookAuthor);
+  const bookPages = document.createElement('div');
+  bookPages.textContent = book.pages;
+  bookCard.appendChild(bookPages);
+  const bookRead = document.createElement('div');
+  bookRead.textContent = book.read ? 'Has been read' : 'Not read';
+  bookCard.appendChild(bookRead);
+  const removeBook = document.createElement('div');
+  removeBook.classList.add('remove-button');
+  removeBook.textContent = 'Remove';
+  bookCard.appendChild(removeBook);
 
   bookShelf.appendChild(bookCard);
 }
@@ -102,7 +112,7 @@ addButton.addEventListener('click', () => {
   const title = titleInput.value;
   const author = authorInput.value;
   const pages = pagesInput.value;
-  const read = readInput.value;
+  const read = readInput.checked;
 
   const newBook = new Book(title, author, pages, read);
   addBookToLibrary(newBook);
