@@ -32,38 +32,81 @@ function addLibraryToShelf() {
   });
 }
 
-const bookShelf = document.querySelector('#book-shelf');
+function addBookToShelf(book) {
+  const bookCard = document.createElement('div');
+  bookCard.classList.add('book-card');
 
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
-addBookToLibrary(theHobbit);
+  const bookTitle = document.createElement('div');
+  bookTitle.textContent = book.title;
+  bookCard.appendChild(bookTitle);
+  const bookAuthor = document.createElement('div');
+  bookAuthor.textContent = book.author;
+  bookCard.appendChild(bookAuthor);
 
-const theGunslinger = new Book('The Gunslinger', 'Stephen King', 190, true);
-addBookToLibrary(theGunslinger);
+  bookShelf.appendChild(bookCard);
+}
 
-const braveNewWorld = new Book('Brave New World', 'Aldous Huxley', 311, true);
-addBookToLibrary(braveNewWorld);
-
-const nineteenEightyFour = new Book('1984', 'George Orwell', 328, true);
-addBookToLibrary(nineteenEightyFour);
-
-addLibraryToShelf();
-
-const modal = document.querySelector('.modal');
-const trigger = document.querySelector('.trigger');
-const closeButton = document.querySelector('.close-button');
+function resetForm() {
+  titleInput.value = '';
+  authorInput.value = '';
+  pagesInput.value = '';
+  readInput.checked = false;
+}
 
 function toggleModal() {
-  console.log('toggleModal');
   modal.classList.toggle('show-modal');
+  resetForm();
 }
 
 function windowOnClick(event) {
-  console.log(event.target);
   if (event.target === modal) {
     toggleModal();
   }
 }
 
+function addInitialBooks() {
+  const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
+  addBookToLibrary(theHobbit);
+
+  const theGunslinger = new Book('The Gunslinger', 'Stephen King', 190, true);
+  addBookToLibrary(theGunslinger);
+
+  const braveNewWorld = new Book('Brave New World', 'Aldous Huxley', 311, true);
+  addBookToLibrary(braveNewWorld);
+
+  const nineteenEightyFour = new Book('1984', 'George Orwell', 328, true);
+  addBookToLibrary(nineteenEightyFour);
+
+  addLibraryToShelf();
+}
+
+const bookShelf = document.querySelector('#book-shelf');
+
+addInitialBooks();
+
+const modal = document.querySelector('.modal');
+const trigger = document.querySelector('.trigger');
+const closeButton = document.querySelector('.close-button');
+
+const titleInput = document.getElementById('title');
+const authorInput = document.getElementById('author');
+const pagesInput = document.getElementById('pages');
+const readInput = document.getElementById('read');
+
 trigger.addEventListener('click', toggleModal);
 closeButton.addEventListener('click', toggleModal);
 window.addEventListener('click', windowOnClick);
+
+const addButton = document.querySelector('.add-button');
+addButton.addEventListener('click', () => {
+  const title = titleInput.value;
+  const author = authorInput.value;
+  const pages = pagesInput.value;
+  const read = readInput.value;
+
+  const newBook = new Book(title, author, pages, read);
+  addBookToLibrary(newBook);
+  addBookToShelf(newBook);
+  console.log(newBook);
+  toggleModal();
+});
