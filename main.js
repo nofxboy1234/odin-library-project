@@ -13,23 +13,12 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(book) {
-  myLibrary.push(book);
+  const bookIndex = myLibrary.push(book) - 1;
+  return bookIndex;
 }
 
 function addLibraryToShelf() {
   myLibrary.forEach((book) => {
-    // const bookCard = document.createElement('div');
-    // bookCard.classList.add('book-card');
-
-    // const bookTitle = document.createElement('div');
-    // bookTitle.textContent = book.title;
-    // bookCard.appendChild(bookTitle);
-    // const bookAuthor = document.createElement('div');
-    // bookAuthor.textContent = book.author;
-    // bookCard.appendChild(bookAuthor);
-
-    // bookShelf.appendChild(bookCard);
-
     addBookToShelf(book);
   });
 }
@@ -37,6 +26,7 @@ function addLibraryToShelf() {
 function addBookToShelf(book) {
   const bookCard = document.createElement('div');
   bookCard.classList.add('book-card');
+  bookCard.dataset.bookIndex = book.bookIndex;
 
   const bookTitle = document.createElement('div');
   bookTitle.textContent = book.title;
@@ -78,16 +68,20 @@ function windowOnClick(event) {
 
 function addInitialBooks() {
   const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
-  addBookToLibrary(theHobbit);
+  let bookIndex = addBookToLibrary(theHobbit);
+  theHobbit.bookIndex = bookIndex;
 
   const theGunslinger = new Book('The Gunslinger', 'Stephen King', 190, true);
-  addBookToLibrary(theGunslinger);
+  bookIndex = addBookToLibrary(theGunslinger);
+  theGunslinger.bookIndex = bookIndex;
 
   const braveNewWorld = new Book('Brave New World', 'Aldous Huxley', 311, true);
-  addBookToLibrary(braveNewWorld);
+  bookIndex = addBookToLibrary(braveNewWorld);
+  braveNewWorld.bookIndex = bookIndex;
 
   const nineteenEightyFour = new Book('1984', 'George Orwell', 328, true);
-  addBookToLibrary(nineteenEightyFour);
+  bookIndex = addBookToLibrary(nineteenEightyFour);
+  nineteenEightyFour.bookIndex = bookIndex;
 
   addLibraryToShelf();
 }
@@ -127,7 +121,8 @@ addButton.addEventListener('click', () => {
   }
 
   const newBook = new Book(title, author, pages, read);
-  addBookToLibrary(newBook);
+  const bookIndex = addBookToLibrary(newBook);
+  newBook.bookIndex = bookIndex;
   addBookToShelf(newBook);
   console.log(newBook);
   toggleModal();
