@@ -86,6 +86,21 @@ function addInitialBooks() {
   addLibraryToShelf();
 }
 
+function removeBookFromLibrary(bookIndex) {
+  myLibrary.splice(bookIndex, 1);
+}
+
+function removeBookFromShelf(bookCardToRemove) {
+  bookShelf.removeChild(bookCardToRemove);
+}
+
+function removeBook(event) {
+  const bookCardToRemove = event.target.parentElement;
+  const bookIndex = bookCardToRemove.dataset.bookIndex;
+  removeBookFromLibrary(bookIndex);
+  removeBookFromShelf(bookCardToRemove);
+}
+
 const bookShelf = document.querySelector('#book-shelf');
 
 addInitialBooks();
@@ -126,4 +141,9 @@ addButton.addEventListener('click', () => {
   addBookToShelf(newBook);
   console.log(newBook);
   toggleModal();
+});
+
+const removeButtons = document.querySelectorAll('.remove-button');
+removeButtons.forEach((button) => {
+  button.addEventListener('click', removeBook);
 });
