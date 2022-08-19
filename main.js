@@ -13,8 +13,7 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(book) {
-  const bookIndex = myLibrary.push(book) - 1;
-  return bookIndex;
+  myLibrary.push(book);
 }
 
 function addLibraryToShelf() {
@@ -26,7 +25,6 @@ function addLibraryToShelf() {
 function addBookToShelf(book) {
   const bookCard = document.createElement('div');
   bookCard.classList.add('book-card');
-  bookCard.dataset.bookIndex = book.bookIndex;
 
   const bookTitle = document.createElement('div');
   bookTitle.classList.add('book-card-title');
@@ -42,10 +40,11 @@ function addBookToShelf(book) {
   const bookRead = document.createElement('div');
   bookRead.textContent = book.read ? 'Has been read' : 'Not read';
   bookCard.appendChild(bookRead);
-  const removeBook = document.createElement('div');
-  removeBook.classList.add('remove-button');
-  removeBook.textContent = 'Remove';
-  bookCard.appendChild(removeBook);
+  const removeBookButton = document.createElement('div');
+  removeBookButton.classList.add('remove-button');
+  removeBookButton.addEventListener('click', removeBook);
+  removeBookButton.textContent = 'Remove';
+  bookCard.appendChild(removeBookButton);
 
   bookShelf.appendChild(bookCard);
 }
@@ -55,6 +54,7 @@ function resetForm() {
   authorInput.value = '';
   pagesInput.value = '1';
   readInput.checked = false;
+  titleInput.focus();
 }
 
 function toggleModal() {
@@ -70,20 +70,16 @@ function windowOnClick(event) {
 
 function addInitialBooks() {
   const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
-  let bookIndex = addBookToLibrary(theHobbit);
-  theHobbit.bookIndex = bookIndex;
+  addBookToLibrary(theHobbit);
 
   const theGunslinger = new Book('The Gunslinger', 'Stephen King', 190, true);
-  bookIndex = addBookToLibrary(theGunslinger);
-  theGunslinger.bookIndex = bookIndex;
+  addBookToLibrary(theGunslinger);
 
   const braveNewWorld = new Book('Brave New World', 'Aldous Huxley', 311, true);
-  bookIndex = addBookToLibrary(braveNewWorld);
-  braveNewWorld.bookIndex = bookIndex;
+  addBookToLibrary(braveNewWorld);
 
   const nineteenEightyFour = new Book('1984', 'George Orwell', 328, true);
-  bookIndex = addBookToLibrary(nineteenEightyFour);
-  nineteenEightyFour.bookIndex = bookIndex;
+  addBookToLibrary(nineteenEightyFour);
 
   addLibraryToShelf();
 }
@@ -109,6 +105,26 @@ function removeBook(event) {
   const bookCardToRemove = event.target.parentElement;
   removeBookFromShelf(bookCardToRemove);
   removeBookFromLibrary(bookCardToRemove);
+  console.log(myLibrary);
+}
+
+function bookExists(newBook) {
+  let bookFound = false;
+  myLibrary.forEach((book) => {
+    // console.log(typeof book.title);
+    // console.log(typeof newBook.title);
+
+    // console.log(`book.title: ${book.title}`);
+    // console.log(`newBook.title: ${newBook.title}`);
+    // console.log(`book.author: ${book.author}`);
+    // console.log(`newBook.author: ${newBook.author}`);
+
+    if (book.title === newBook.title && book.author === newBook.author) {
+      console.log('found book');
+      bookFound = true;
+    }
+  });
+  return bookFound;
 }
 
 const bookShelf = document.querySelector('#book-shelf');
@@ -146,14 +162,19 @@ addButton.addEventListener('click', () => {
   }
 
   const newBook = new Book(title, author, pages, read);
-  const bookIndex = addBookToLibrary(newBook);
-  newBook.bookIndex = bookIndex;
-  addBookToShelf(newBook);
-  console.log(newBook);
-  toggleModal();
+  if (!bookExists(newBook)) {
+    addBookToLibrary(newBook);
+    addBookToShelf(newBook);
+    console.log(myLibrary);
+    toggleModal();
+  } else {
+    alert('Book already exists in library');
+  }
 });
 
 const removeButtons = document.querySelectorAll('.remove-button');
 removeButtons.forEach((button) => {
   button.addEventListener('click', removeBook);
 });
+
+console.log(myLibrary);
