@@ -26,17 +26,35 @@ function addBookToShelf(book) {
   const bookCard = document.createElement('div');
   bookCard.classList.add('book-card');
 
+  bookTitleLabel = document.createElement('div');
+  bookTitleLabel.textContent = 'Title';
+  bookCard.appendChild(bookTitleLabel);
+
   const bookTitle = document.createElement('div');
   bookTitle.classList.add('book-card-title');
   bookTitle.textContent = book.title;
   bookCard.appendChild(bookTitle);
+
+  bookAuthorLabel = document.createElement('div');
+  bookAuthorLabel.textContent = 'Author';
+  bookCard.appendChild(bookAuthorLabel);
+
   const bookAuthor = document.createElement('div');
   bookAuthor.classList.add('book-card-author');
   bookAuthor.textContent = book.author;
   bookCard.appendChild(bookAuthor);
+
+  bookPagesLabel = document.createElement('div');
+  bookPagesLabel.textContent = 'Pages';
+  bookCard.appendChild(bookPagesLabel);
+
   const bookPages = document.createElement('div');
   bookPages.textContent = book.pages;
   bookCard.appendChild(bookPages);
+
+  bookReadLabel = document.createElement('div');
+  bookReadLabel.textContent = 'Read?';
+  bookCard.appendChild(bookReadLabel);
 
   const bookRead = document.createElement('input');
   bookRead.type = 'checkbox';
