@@ -58,20 +58,37 @@
 // aTest.someMethod(); // Mike,Anil,Richard,Jurgen -- Testing
 
 // --------Prototypes--------
-function Student() {}
+function Student() {
+  this.lunch = 'sandwiches';
+}
 
 Student.prototype.sayName = function () {
   console.log(this.name);
 };
 
 function EighthGrader(name) {
-  this.name = name;
+  this.name = name || 'noname';
   this.grade = 8;
+  // this.lunch = 'macaroni';
 }
+EighthGrader.prototype = new Student(); // Old way - Set EighthGrader's prototype to Student's constructor
+// EighthGrader.prototype = Object.create(Student.prototype);
 
-// EighthGrader.prototype = new Student(); // Old way - Set EighthGrader's prototype to Student's constructor
-EighthGrader.prototype = Object.create(Student.prototype);
+function NinthGrader(name) {
+  this.name = name || 'noname';
+  this.grade = 9;
+}
+NinthGrader.prototype = Object.create(Student.prototype);
+NinthGrader.prototype.sayName = function () {
+  console.log(`My name is ${this.name} and I am a NinthGrader`);
+};
 
 const carl = new EighthGrader('carl');
 carl.sayName(); // console.logs "carl"
 console.log(carl.grade); // 8
+console.log(carl.lunch);
+
+const maria = new NinthGrader('maria');
+maria.sayName();
+console.log(maria.grade);
+console.log(maria.lunch);
