@@ -75,10 +75,12 @@ EighthGrader.prototype = new Student(); // Old way - Set EighthGrader's prototyp
 // EighthGrader.prototype = Object.create(Student.prototype);
 
 function NinthGrader(name) {
+  Student.call(this);
   this.name = name || 'noname';
   this.grade = 9;
 }
 NinthGrader.prototype = Object.create(Student.prototype);
+NinthGrader.prototype.constructor = NinthGrader;
 NinthGrader.prototype.sayName = function () {
   console.log(`My name is ${this.name} and I am a NinthGrader`);
 };
@@ -92,3 +94,53 @@ const maria = new NinthGrader('maria');
 maria.sayName();
 console.log(maria.grade);
 console.log(maria.lunch);
+
+// --------Prototypes--------
+// Shape - superclass
+function Shape() {
+  this.x = 0;
+  this.y = 0;
+  this.special = 'secret';
+}
+
+// superclass method
+Shape.prototype.move = function (x, y) {
+  this.x += x;
+  this.y += y;
+  console.info('Shape moved.');
+};
+
+// Rectangle - subclass
+function Rectangle() {
+  Shape.call(this); // call super constructor.
+  this.sides = 4;
+  this.x = 5;
+  this.y = 5;
+}
+
+// subclass extends superclass
+Rectangle.prototype = Object.create(Shape.prototype);
+
+//If you don't set Rectangle.prototype.constructor to Rectangle,
+//it will take the prototype.constructor of Shape (parent).
+//To avoid that, we set the prototype.constructor to Rectangle (child).
+Rectangle.prototype.constructor = Rectangle;
+Rectangle.prototype.move = function (moveAmount) {
+  this.x += moveAmount * 2;
+  this.y += moveAmount * 2;
+  console.log('Shape moved: Rectangle.move');
+};
+
+const shape = new Shape();
+shape.move(1, 1);
+shape.move(1, 1);
+console.log(shape.x, shape.y);
+console.log(shape.sides);
+
+const rect = new Rectangle();
+console.log('Is rect an instance of Rectangle?', rect instanceof Rectangle); // true
+console.log('Is rect an instance of Shape?', rect instanceof Shape); // true
+rect.move(1, 1); // Outputs, 'Shape moved.'
+console.log(rect.x);
+console.log(rect.sides);
+console.log(rect.special);
