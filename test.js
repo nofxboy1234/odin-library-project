@@ -45,6 +45,7 @@ Test.prototype = {
   },
 };
 Test.prototype.sharedRefType = ['a', 'b'];
+Test.prototype.sharedNonRefType = 'Dylan';
 
 var aTest = new Test('-- Testing');
 aTest.variable2.push('Richard');
@@ -53,6 +54,8 @@ aTest.sharedRefType.push('c');
 console.log(aTest.sharedRefType);
 aTest.uniqueRefType.push('z');
 console.log(aTest.uniqueRefType);
+aTest.sharedNonRefType = 'Bert';
+console.log(aTest.sharedNonRefType);
 
 var anotherTest = new Test('-- Testing2');
 anotherTest.variable2.push('Jurgen');
@@ -62,6 +65,7 @@ anotherTest.someMethod(); // Mike,Anil,Richard,Jurgen -- Testing2
 aTest.someMethod(); // Mike,Anil,Richard,Jurgen -- Testing
 console.log(anotherTest.sharedRefType);
 console.log(anotherTest.uniqueRefType);
+console.log(anotherTest.sharedNonRefType);
 
 // --------Prototypes--------
 function Student() {
