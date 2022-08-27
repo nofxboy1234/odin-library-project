@@ -32,30 +32,36 @@
 // console.log(aBanana.showNameAndColor()); // I am a Banana and my color is yellow.
 
 // --------Prototypes--------
-// function Test(theVariable) {
-//   this.variable = theVariable;
-// }
+function Test(theVariable) {
+  this.variable = theVariable;
+  this.uniqueRefType = ['x', 'y'];
+}
 
-// Test.prototype = {
-//   constructor: Test,
-//   variable2: ['Mike', 'Anil'],
-//   someMethod: function () {
-//     console.log(this.variable2 + ' ' + this.variable);
-//   },
-// };
+Test.prototype = {
+  constructor: Test,
+  variable2: ['Mike', 'Anil'],
+  someMethod: function () {
+    console.log(this.variable2 + ' ' + this.variable);
+  },
+};
+Test.prototype.sharedRefType = ['a', 'b'];
 
-// var aTest = new Test('-- Testing');
-// aTest.variable2.push('Richard');
-// aTest.someMethod(); // Mike,Anil,Richard -- Testing
+var aTest = new Test('-- Testing');
+aTest.variable2.push('Richard');
+aTest.someMethod(); // Mike,Anil,Richard -- Testing
+aTest.sharedRefType.push('c');
+console.log(aTest.sharedRefType);
+aTest.uniqueRefType.push('z');
+console.log(aTest.uniqueRefType);
 
-// var anotherTest = new Test('-- Testing');
-// anotherTest.variable2.push('Jurgen');
-
-// // Uses the same array from the prototype (Richard is included)
-// anotherTest.someMethod(); // Mike,Anil,Richard,Jurgen -- Testing
-
-// // variable2 changed on ALL instances:
-// aTest.someMethod(); // Mike,Anil,Richard,Jurgen -- Testing
+var anotherTest = new Test('-- Testing2');
+anotherTest.variable2.push('Jurgen');
+// Uses the same array from the prototype (Richard is included)
+anotherTest.someMethod(); // Mike,Anil,Richard,Jurgen -- Testing2
+// variable2 changed on ALL instances:
+aTest.someMethod(); // Mike,Anil,Richard,Jurgen -- Testing
+console.log(anotherTest.sharedRefType);
+console.log(anotherTest.uniqueRefType);
 
 // --------Prototypes--------
 function Student() {
