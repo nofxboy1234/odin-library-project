@@ -62,12 +62,59 @@
 // console.log(f instanceof C); // Is an instance of C!?!
 // console.log(F.prototype.isPrototypeOf(f));
 
-function C() {}
-C.prototype = { prototype_prop: 'proto' };
-// Changing the prototype breaks the constructor
-// property for all objects created after the change.
-c = new C();
-console.log(c instanceof C); //=> true
-console.log(c.constructor === C); //=> false
-C.prototype.constructor = C;
-console.log(c.constructor === C); //=> true
+// function C() {}
+// C.prototype = { prototype_prop: 'proto' };
+// // Changing the prototype breaks the constructor
+// // property for all objects created after the change.
+// c = new C();
+// console.log(c instanceof C); //=> true
+// console.log(c.constructor === C); //=> false
+// C.prototype.constructor = C;
+// console.log(c.constructor === C); //=> true
+
+// Constructor function
+// function MyObject(data) {
+//   this.data = data;
+// }
+// MyObject.prototype = {
+//   getData: function () {
+//     return this.data;
+//   },
+//   setFancyData: function (data) {
+//     this.data = `fancy data: ${data}`;
+//   },
+// };
+// MyObject.prototype.sayHello = function () {
+//   console.log('hello ' + this.data + ' is my data');
+// };
+// var o = new MyObject('data');
+// console.log(o.data);
+// console.log(o.getData());
+// o.setFancyData('abc');
+// console.log(o.getData());
+// o.sayHello();
+// console.log(o);
+
+// Constructor function
+function MyObject(data) {
+  this.data = data;
+}
+MyObject.prototype = {
+  getData: function () {
+    return this.data;
+  },
+};
+var o = new MyObject('data');
+
+// Factory function
+function myObject(data) {
+  var obj = Object.create(myObject.proto);
+  obj.data = data;
+  return obj;
+}
+myObject.proto = {
+  getData: function () {
+    return this.data;
+  },
+};
+var o = myObject('data');
