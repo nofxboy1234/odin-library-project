@@ -46,3 +46,22 @@ console.log(Square.prototype.constructor);
 console.log(square.constructor);
 console.log(square.squareProp);
 console.log(square.sharedSquareProp);
+
+const square2 = new square.constructor();
+console.log(square2.sides);
+
+console.log(Square.prototype.constructor);
+console.log(square2.constructor);
+console.log(square2.squareProp);
+console.log(square2.sharedSquareProp);
+
+function Rectangle2() {
+  console.log('Rectangle2 constructor');
+  this.sides = 4;
+}
+Rectangle2.prototype = Object.create(Shape.prototype);
+
+const rectangle2 = new Rectangle2();
+console.log(rectangle2.constructor);
+console.log(Rectangle2.prototype.constructor);
+console.log(Rectangle2.prototype);
