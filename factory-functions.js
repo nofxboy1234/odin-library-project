@@ -86,8 +86,8 @@
 // };
 // MyObject.prototype.sayHello = function () {
 //   console.log('hello ' + this.data + ' is my data');
-// };
 // var o = new MyObject('data');
+// };
 // console.log(o.data);
 // console.log(o.getData());
 // o.setFancyData('abc');
@@ -96,19 +96,27 @@
 // console.log(o);
 
 // Constructor function
-function MyObject(data) {
-  this.data = data;
-}
-MyObject.prototype = {
-  getData: function () {
-    return this.data;
-  },
-};
-var o = new MyObject('data');
+// function MyObject(data) {
+//   this.data = data;
+// }
+// MyObject.prototype = {
+//   getData: function () {
+//     return this.data;
+//   },
+// };
+// // MyObject.prototype.sayHello = function () {
+// //   console.log('hello!');
+// // };
+// let o = new MyObject('data');
+// // ---------------------------
+// console.log(o);
+// console.log(o.getData());
+// console.log(o instanceof MyObject);
+// ---------------------------
 
 // Factory function
 function myObject(data) {
-  var obj = Object.create(myObject.proto);
+  const obj = Object.create(myObject.proto);
   obj.data = data;
   return obj;
 }
@@ -117,4 +125,20 @@ myObject.proto = {
     return this.data;
   },
 };
-var o = myObject('data');
+let o = myObject('data');
+// ---------------------------
+console.log(o);
+console.log(o.getData());
+console.log(o instanceof myObject);
+// console.log(myObject.proto);
+// ---------------------------
+
+// Generic factory can be used to invoke constructor functions
+// in a more explicit manner
+// function genericFactory(Ctr) {
+//   var obj = Object.create(Ctr.prototype);
+//   var args = Array.prototype.slice.call(arguments, 1);
+//   Ctr.apply(obj, args);
+//   return obj;
+// }
+// var o = genericFactory(MyObject, 'data');
