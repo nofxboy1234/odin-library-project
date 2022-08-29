@@ -112,7 +112,7 @@
 // console.log(o);
 // console.log(o.getData());
 // console.log(o instanceof MyObject);
-// ---------------------------
+// // ---------------------------
 
 // Factory function
 function myObject(data) {
@@ -136,9 +136,14 @@ console.log(o instanceof myObject);
 // Generic factory can be used to invoke constructor functions
 // in a more explicit manner
 // function genericFactory(Ctr) {
-//   var obj = Object.create(Ctr.prototype);
-//   var args = Array.prototype.slice.call(arguments, 1);
+//   const obj = Object.create(Ctr.prototype);
+//   const args = Array.prototype.slice.call(arguments, 1);
 //   Ctr.apply(obj, args);
 //   return obj;
 // }
-// var o = genericFactory(MyObject, 'data');
+// let o2 = genericFactory(MyObject, 'data');
+// // ---------------------------
+// console.log(o2);
+// console.log(o2.getData());
+// console.log(o2 instanceof MyObject);
+// // ---------------------------
