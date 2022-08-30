@@ -115,21 +115,21 @@
 // // ---------------------------
 
 // Factory function
-function myObject(data) {
-  const obj = Object.create(myObject.proto);
-  obj.data = data;
-  return obj;
-}
-myObject.proto = {
-  getData: function () {
-    return this.data;
-  },
-};
-let o = myObject('data');
-// ---------------------------
-console.log(o);
-console.log(o.getData());
-console.log(o instanceof myObject);
+// function myObject(data) {
+//   const obj = Object.create(myObject.proto);
+//   obj.data = data;
+//   return obj;
+// }
+// myObject.proto = {
+//   getData: function () {
+//     return this.data;
+//   },
+// };
+// let o = myObject('data');
+// // ---------------------------
+// console.log(o);
+// console.log(o.getData());
+// console.log(o instanceof myObject);
 // console.log(myObject.proto);
 // ---------------------------
 
@@ -147,3 +147,40 @@ console.log(o instanceof myObject);
 // console.log(o2.getData());
 // console.log(o2 instanceof MyObject);
 // // ---------------------------
+
+// const personFactory = (name) => {
+//   const sayHello = () => console.log('hello!');
+//   return { name, sayHello };
+// };
+// const dylan = personFactory('Dylan');
+// console.log(dylan.name);
+// dylan.sayHello();
+
+const Player = (name, level) => {
+  let health = level * 2;
+  const getLevel = () => level;
+  const getName = () => name;
+  const die = () => {
+    console.log(`${name} died`);
+  };
+  const damage = (x) => {
+    health -= x;
+    if (health <= 0) {
+      die();
+    }
+  };
+  const attack = (enemy) => {
+    if (level < enemy.getLevel()) {
+      damage(1);
+      console.log(`${enemy.getName()} has damaged ${name}`);
+    }
+    if (level >= enemy.getLevel()) {
+      enemy.damage(1);
+      console.log(`${name} has damaged ${enemy.getName()}`);
+    }
+  };
+  return { attack, damage, getLevel, getName };
+};
+const hunter = Player('hunter', 10);
+const beast = Player('beast', 5);
+hunter.attack(beast);
