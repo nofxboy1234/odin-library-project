@@ -156,44 +156,63 @@
 // console.log(dylan.name);
 // dylan.sayHello();
 
-const Player = (name, level) => {
-  let health = level * 2;
-  let weapon = 'teeth';
-  const getHealth = () => health;
-  const getWeapon = () => weapon;
-  const getLevel = () => level;
-  const getName = () => name;
-  const die = () => {
-    console.log(`${name} died`);
-  };
-  const damage = (x) => {
-    health -= x;
-    if (health <= 0) {
-      die();
-    }
-  };
-  const attack = (enemy) => {
-    if (level < enemy.getLevel()) {
-      damage(1);
-      console.log(`${enemy.getName()} has damaged ${name}`);
-    }
-    if (level >= enemy.getLevel()) {
-      enemy.damage(1);
-      console.log(`${name} has damaged ${enemy.getName()}`);
-    }
-  };
-  return { attack, damage, getLevel, getName, health, getHealth, getWeapon };
+// const Player = (name, level) => {
+//   let health = level * 2;
+//   let weapon = 'teeth';
+//   const getHealth = () => health;
+//   const getWeapon = () => weapon;
+//   const getLevel = () => level;
+//   const getName = () => name;
+//   const die = () => {
+//     console.log(`${name} died`);
+//   };
+//   const damage = (x) => {
+//     health -= x;
+//     if (health <= 0) {
+//       die();
+//     }
+//   };
+//   const attack = (enemy) => {
+//     if (level < enemy.getLevel()) {
+//       damage(1);
+//       console.log(`${enemy.getName()} has damaged ${name}`);
+//     }
+//     if (level >= enemy.getLevel()) {
+//       enemy.damage(1);
+//       console.log(`${name} has damaged ${enemy.getName()}`);
+//     }
+//   };
+//   return { attack, damage, getLevel, getName, health, getHealth, getWeapon };
+// };
+// const hunter = Player('hunter', 10);
+// const beast = Player('beast', 5);
+// console.log(`beast.health: ${beast.health}`);
+// console.log(`beast.getHealth(): ${beast.getHealth()}`);
+// // beast.health -= 1;
+// hunter.attack(beast);
+// console.log(`beast.health: ${beast.health}`);
+// console.log(`beast.getHealth(): ${beast.getHealth()}`);
+// //
+// beast.weapon = 'claws';
+// console.log(`beast.weapon: ${beast.weapon}`);
+// console.log(beast);
+// console.log(`beast.getWeapon(): ${beast.getWeapon()}`);
+
+const Person = (name) => {
+  const sayName = () => console.log(`my name is ${name}`);
+  return { sayName };
 };
-const hunter = Player('hunter', 10);
-const beast = Player('beast', 5);
-console.log(`beast.health: ${beast.health}`);
-console.log(`beast.getHealth(): ${beast.getHealth()}`);
-// beast.health -= 1;
-hunter.attack(beast);
-console.log(`beast.health: ${beast.health}`);
-console.log(`beast.getHealth(): ${beast.getHealth()}`);
-//
-beast.weapon = 'claws';
-console.log(`beast.weapon: ${beast.weapon}`);
-console.log(beast);
-console.log(`beast.getWeapon(): ${beast.getWeapon()}`);
+// const Nerd = (name) => {
+//   // simply create a person and pull out the sayName function with destructuring assignment syntax!
+//   const { sayName } = Person(name);
+//   const doSomethingNerdy = () => console.log('nerd stuff');
+//   return { sayName, doSomethingNerdy };
+// };
+const Nerd = (name) => {
+  const prototype = Person(name);
+  const doSomethingNerdy = () => console.log('nerd stuff');
+  return Object.assign({}, prototype, { doSomethingNerdy });
+};
+const jeff = Nerd('jeff');
+jeff.sayName(); //my name is jeff
+jeff.doSomethingNerdy(); // nerd stuff
