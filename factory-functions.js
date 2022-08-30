@@ -159,6 +159,7 @@
 const Player = (name, level) => {
   let health = level * 2;
   const getHealth = () => health;
+  const getWeapon = () => weapon;
   const getLevel = () => level;
   const getName = () => name;
   const die = () => {
@@ -180,12 +181,19 @@ const Player = (name, level) => {
       console.log(`${name} has damaged ${enemy.getName()}`);
     }
   };
-  return { attack, damage, getLevel, getName, health, getHealth };
+  return { attack, damage, getLevel, getName, health, getHealth, getWeapon };
 };
 const hunter = Player('hunter', 10);
 const beast = Player('beast', 5);
 console.log(beast);
-console.log(`beast.health: ${beast.getHealth()}`);
+console.log(`beast.health: ${beast.health}`);
+console.log(`beast.getHealth(): ${beast.getHealth()}`);
+// beast.health -= 1;
 hunter.attack(beast);
 console.log(beast);
-console.log(`beast.health: ${beast.getHealth()}`);
+console.log(`beast.health: ${beast.health}`);
+console.log(`beast.getHealth(): ${beast.getHealth()}`);
+//
+beast.weapon = 'claws';
+console.log(`beast.weapon: ${beast.weapon}`);
+console.log(`beast.getWeapon(): ${beast.getWeapon()}`);
