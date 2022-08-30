@@ -198,21 +198,53 @@
 // console.log(beast);
 // console.log(`beast.getWeapon(): ${beast.getWeapon()}`);
 
-const Person = (name) => {
-  const sayName = () => console.log(`my name is ${name}`);
-  return { sayName };
-};
+// const Person = (name) => {
+//   const sayName = () => console.log(`my name is ${name}`);
+//   return { sayName };
+// };
 // const Nerd = (name) => {
 //   // simply create a person and pull out the sayName function with destructuring assignment syntax!
 //   const { sayName } = Person(name);
 //   const doSomethingNerdy = () => console.log('nerd stuff');
 //   return { sayName, doSomethingNerdy };
 // };
-const Nerd = (name) => {
-  const prototype = Person(name);
-  const doSomethingNerdy = () => console.log('nerd stuff');
-  return Object.assign({}, prototype, { doSomethingNerdy });
+// const Nerd = (name) => {
+//   const prototype = Person(name);
+//   const doSomethingNerdy = () => console.log('nerd stuff');
+//   return Object.assign({}, prototype, { doSomethingNerdy });
+// };
+// const jeff = Nerd('jeff');
+// jeff.sayName(); //my name is jeff
+// jeff.doSomethingNerdy(); // nerd stuff
+
+const barker = (state) => ({
+  volume: 2,
+  bark: () => console.log('Woof, I am ' + state.name),
+});
+// const barker = (state) => {
+//   const bark = () => console.log('Woof, I am ' + state.name);
+//   return { bark };
+// };
+const driver = (state) => ({
+  drive: () => (state.position = state.position + state.speed),
+});
+const killer = (state) => ({
+  kill: () => console.log(`Killed by ${state.name}`),
+});
+// const dog = barker({ name: 'karo' }).bark();
+// const dog = barker({ name: 'karo' });
+// dog.bark();
+// console.log(dog.volume);
+// console.log(dog);
+const murderRobotDog = (name) => {
+  let state = {
+    name,
+    speed: 100,
+    position: 0,
+  };
+  return Object.assign({}, barker(state), driver(state), killer(state));
 };
-const jeff = Nerd('jeff');
-jeff.sayName(); //my name is jeff
-jeff.doSomethingNerdy(); // nerd stuff
+const dog = murderRobotDog('sniffles');
+dog.bark();
+dog.kill();
+console.log(dog.volume);
