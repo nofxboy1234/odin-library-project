@@ -370,6 +370,7 @@ jeff.sayName(); //my name is jeff
 console.log('\n');
 
 const barker = (state) => ({
+  secretPoop: `This is ${state.name}'s poop`,
   bark: () => console.log('Woof, I am ' + state.name),
   isPooper: () => console.log(poops),
   getState: () => console.log(state),
@@ -377,6 +378,10 @@ const barker = (state) => ({
 
 const driver = (state) => ({
   drive: () => (state.position = state.position + state.speed),
+});
+
+const killer = (state) => ({
+  kill: () => console.log('Killed by ' + state.name),
 });
 
 const barker1 = barker({ name: 'karo' });
@@ -393,3 +398,22 @@ console.log(barker2.state); // undefined
 barker2.state = { a: 1 };
 console.log(barker2.state); // undefined
 barker2.getState();
+
+console.log('\n');
+
+const murderRobotDog = (name) => {
+  let state = {
+    name,
+    speed: 100,
+    position: 0,
+  };
+  return Object.assign({}, barker(state), driver(state), killer(state), {
+    state,
+  });
+};
+
+const murderDog = murderRobotDog('sniffles');
+murderDog.bark();
+// console.log(murderDog.name);
+console.log(murderDog.state);
+console.log(murderDog.secretPoop);
