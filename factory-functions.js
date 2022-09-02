@@ -217,34 +217,164 @@
 // jeff.sayName(); //my name is jeff
 // jeff.doSomethingNerdy(); // nerd stuff
 
+// const barker = (state) => ({
+//   volume: 2,
+//   getVolume: () => console.log(volume),
+//   bark: () => console.log('Woof, I am ' + state.name),
+// });
+// const driver = (state) => ({
+//   drive: () => (state.position = state.position + state.speed),
+// });
+// const killer = (state) => ({
+//   kill: () => console.log(`Killed by ${state.name}`),
+// });
+// const murderRobotDog = (name) => {
+//   let state = {
+//     name,
+//     speed: 100,
+//     position: 0,
+//   };
+//   return Object.assign({}, barker(state), driver(state), killer(state));
+// };
+// const sniffles = barker({ name: 'sniffles', speed: 100, position: 0 });
+// console.log(sniffles);
+// sniffles.bark();
+// console.log(sniffles.name);
+// sniffles.name = 'bob';
+// console.log(sniffles.name);
+// console.log(sniffles);
+// sniffles.bark();
+// console.log(sniffles.volume);
+// console.log(sniffles);
+// sniffles.volume = 3;
+// console.log(sniffles);
+// console.log(sniffles.volume);
+// sniffles.getVolume();
+// console.log('\n');
+
+// const woofles = barker({ name: 'woofles', speed: 100, position: 0 });
+// console.log(woofles);
+// woofles.bark();
+// console.log(woofles.name);
+// woofles.name = 'bobby';
+// console.log(woofles.name);
+// console.log(woofles);
+// woofles.bark();
+
+// console.log('\n');
+
+// console.log(sniffles);
+// sniffles.bark();
+// console.log(sniffles.name);
+
+// const personFactory = (name, age) => {
+//   const setName = (newName) => (name = newName);
+//   const getName = () => name;
+//   const sayHello = () => console.log('hello! I am ' + name);
+//   return { name, age, sayHello, setName, getName };
+// };
+
+// const jeff = personFactory('jeff', 27);
+// const dylan = personFactory('dylan', 38);
+
+// console.log(jeff.name); // jeff
+// jeff.sayHello(); // hello! I am jeff
+// console.log(jeff); // {name: 'jeff', age: 27, sayHello: ƒ}
+
+// console.log('\n');
+
+// jeff.name = 'jeffrey';
+
+// console.log(jeff.name); // jeffrey
+// jeff.sayHello(); // hello! I am jeff
+// console.log(jeff); // {name: 'jeffrey', age: 27, sayHello: ƒ}
+
+// console.log('\n');
+
+// jeff.setName('Geoff');
+
+// console.log(jeff.name); // jeffrey
+// jeff.sayHello(); // hello! I am Geoff
+// console.log(jeff); // {name: 'jeffrey', age: 27, sayHello: ƒ}
+
+// console.log('\n');
+
+// console.log(jeff.getName()); // Geoff
+
+// console.log('\n');
+
+// console.log(dylan.name); // dylan
+// dylan.sayHello(); // hello! I am dylan
+// console.log(dylan); // {name: 'jeff', age: 27, sayHello: ƒ}
+// console.log(dylan.name);
+
+// console.log('\n');
+
+// console.log(jeff.name); // jeff
+// jeff.sayHello(); // hello! I am jeff
+// console.log(jeff); // {name: 'jeff', age: 27, sayHello: ƒ}
+
+// let user = {
+//   name: 'John',
+//   surname: 'Smith',
+
+//   set fullName(value) {
+//     [this.name, this.surname] = value.split(' ');
+//   },
+
+//   get fullName() {
+//     return `${this.name} ${this.surname}`;
+//   },
+// };
+
+// let admin = {
+//   __proto__: user,
+//   isAdmin: true,
+// };
+
+// console.log(admin.fullName); // John Smith (*)
+
+// // setter triggers!
+// admin.fullName = 'Alice Cooper'; // (**)
+
+// console.log(admin.fullName); // Alice Cooper, state of admin modified
+// console.log(user.fullName); // John Smith, state of user protected
+
+// console.log(admin.name);
+// admin.name = 'dylan';
+// console.log(admin.name);
+// console.log(admin.fullName); // Alice Cooper, state of admin modified
+
+const Person = (name) => {
+  const sayName = () => console.log(`my name is ${name}`);
+  return { sayName };
+};
+
+const Nerd = (name) => {
+  // simply create a person and pull out the sayName function with destructuring assignment syntax!
+  const { sayName } = Person(name);
+  const doSomethingNerdy = () => console.log('nerd stuff');
+  return { sayName, doSomethingNerdy, name };
+};
+
+const jeff = Nerd('jeff');
+
+jeff.sayName(); //my name is jeff
+jeff.doSomethingNerdy(); // nerd stuff
+
+console.log(jeff.name);
+jeff.name = 'Geoff';
+console.log(jeff.name);
+jeff.sayName(); //my name is jeff
+
+console.log('\n');
+
 const barker = (state) => ({
-  volume: 2,
   bark: () => console.log('Woof, I am ' + state.name),
 });
-// const barker = (state) => {
-//   const bark = () => console.log('Woof, I am ' + state.name);
-//   return { bark };
-// };
+
 const driver = (state) => ({
   drive: () => (state.position = state.position + state.speed),
 });
-const killer = (state) => ({
-  kill: () => console.log(`Killed by ${state.name}`),
-});
-// const dog = barker({ name: 'karo' }).bark();
-// const dog = barker({ name: 'karo' });
-// dog.bark();
-// console.log(dog.volume);
-// console.log(dog);
-const murderRobotDog = (name) => {
-  let state = {
-    name,
-    speed: 100,
-    position: 0,
-  };
-  return Object.assign({}, barker(state), driver(state), killer(state));
-};
-const dog = murderRobotDog('sniffles');
-dog.bark();
-dog.kill();
-console.log(dog.volume);
+
+barker({ name: 'karo' }).bark();
