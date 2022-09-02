@@ -371,10 +371,25 @@ console.log('\n');
 
 const barker = (state) => ({
   bark: () => console.log('Woof, I am ' + state.name),
+  isPooper: () => console.log(poops),
+  getState: () => console.log(state),
 });
 
 const driver = (state) => ({
   drive: () => (state.position = state.position + state.speed),
 });
 
-barker({ name: 'karo' }).bark();
+const barker1 = barker({ name: 'karo' });
+barker1.bark();
+console.log(barker1);
+
+const barker2 = barker({ name: 'pluto' });
+barker2.bark();
+barker2.poops = true;
+console.log(barker2);
+console.log('poops outside: ' + barker2.poops);
+// barker2.isPooper(); // Uncaught ReferenceError: poops is not defined
+console.log(barker2.state); // undefined
+barker2.state = { a: 1 };
+console.log(barker2.state); // undefined
+barker2.getState();
