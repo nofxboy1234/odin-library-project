@@ -345,75 +345,75 @@
 // console.log(admin.name);
 // console.log(admin.fullName); // Alice Cooper, state of admin modified
 
-const Person = (name) => {
-  const sayName = () => console.log(`my name is ${name}`);
-  return { sayName };
-};
+// const Person = (name) => {
+//   const sayName = () => console.log(`my name is ${name}`);
+//   return { sayName };
+// };
 
-const Nerd = (name) => {
-  // simply create a person and pull out the sayName function with destructuring assignment syntax!
-  const { sayName } = Person(name);
-  const doSomethingNerdy = () => console.log('nerd stuff');
-  return { sayName, doSomethingNerdy, name };
-};
+// const Nerd = (name) => {
+//   // simply create a person and pull out the sayName function with destructuring assignment syntax!
+//   const { sayName } = Person(name);
+//   const doSomethingNerdy = () => console.log('nerd stuff');
+//   return { sayName, doSomethingNerdy, name };
+// };
 
-const jeff = Nerd('jeff');
+// const jeff = Nerd('jeff');
 
-jeff.sayName(); //my name is jeff
-jeff.doSomethingNerdy(); // nerd stuff
+// jeff.sayName(); //my name is jeff
+// jeff.doSomethingNerdy(); // nerd stuff
 
-console.log(jeff.name);
-jeff.name = 'Geoff';
-console.log(jeff.name);
-jeff.sayName(); //my name is jeff
+// console.log(jeff.name);
+// jeff.name = 'Geoff';
+// console.log(jeff.name);
+// jeff.sayName(); //my name is jeff
 
-console.log('\n');
+// console.log('\n');
 
-const barker = (state) => ({
-  secretPoop: `This is ${state.name}'s poop`,
-  bark: () => console.log('Woof, I am ' + state.name),
-  isPooper: () => console.log(poops),
-  getState: () => console.log(state),
-});
+// const barker = (state) => ({
+//   secretPoop: `This is ${state.name}'s poop`,
+//   bark: () => console.log('Woof, I am ' + state.name),
+//   isPooper: () => console.log(poops),
+//   getState: () => console.log(state),
+// });
 
-const driver = (state) => ({
-  drive: () => (state.position = state.position + state.speed),
-});
+// const driver = (state) => ({
+//   drive: () => (state.position = state.position + state.speed),
+// });
 
-const killer = (state) => ({
-  kill: () => console.log('Killed by ' + state.name),
-});
+// const killer = (state) => ({
+//   kill: () => console.log('Killed by ' + state.name),
+// });
 
-const barker1 = barker({ name: 'karo' });
-barker1.bark();
-console.log(barker1);
+// const barker1 = barker({ name: 'karo' });
+// barker1.bark();
+// console.log(barker1);
 
-const barker2 = barker({ name: 'pluto' });
-barker2.bark();
-barker2.poops = true;
-console.log(barker2);
-console.log('poops outside: ' + barker2.poops);
-// barker2.isPooper(); // Uncaught ReferenceError: poops is not defined
-console.log(barker2.state); // undefined
-barker2.state = { a: 1 };
-console.log(barker2.state); // undefined
-barker2.getState();
+// const barker2 = barker({ name: 'pluto' });
+// barker2.bark();
+// barker2.poops = true;
+// console.log(barker2);
+// console.log('poops outside: ' + barker2.poops);
+// // barker2.isPooper(); // Uncaught ReferenceError: poops is not defined
+// console.log(barker2.state); // undefined
+// barker2.state = { a: 1 };
+// console.log(barker2.state); // undefined
+// barker2.getState();
 
-console.log('\n');
+// console.log('\n');
 
-const murderRobotDog = (name) => {
-  let state = {
-    name,
-    speed: 100,
-    position: 0,
-  };
-  return Object.assign({}, barker(state), driver(state), killer(state), {
-    state,
-  });
-};
+// const murderRobotDog = (name) => {
+//   let state = {
+//     name,
+//     speed: 100,
+//     position: 0,
+//   };
+//   return Object.assign({}, barker(state), driver(state), killer(state), {
+//     state,
+//   });
+// };
 
-const murderDog = murderRobotDog('sniffles');
-murderDog.bark();
-// console.log(murderDog.name);
-console.log(murderDog.state);
-console.log(murderDog.secretPoop);
+// const murderDog = murderRobotDog('sniffles');
+// murderDog.bark();
+// // console.log(murderDog.name);
+// console.log(murderDog.state);
+// console.log(murderDog.secretPoop);
