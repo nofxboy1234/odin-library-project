@@ -38,4 +38,40 @@ const myModule = (function () {
 myModule.publicMethod(); // outputs 'Hello World'
 console.log(myModule.publicProperty); // outputs 'I am a public property'
 console.log(myModule._privateProperty); // is undefined protected by the module closure
-myModule._privateMethod(); // is TypeError protected by the module closure
+// myModule._privateMethod(); // is TypeError protected by the module closure
+
+const formatter = (function () {
+  let timesRun = 0;
+
+  const log = (message) => console.log(`[${Date.now()}] Logger: ${message}`);
+  const setTimesRun = () => {
+    log('Setting times run');
+    ++timesRun;
+  };
+
+  const makeUppercase = (text) => {
+    log('Making uppercase');
+    setTimesRun();
+    return text.toUpperCase();
+  };
+
+  const getTimesRun = () => timesRun;
+
+  return {
+    makeUppercase,
+    timesRun,
+    getTimesRun,
+  };
+})();
+
+console.log(formatter.makeUppercase('Tomek'));
+console.log(formatter.makeUppercase('Tomek'));
+console.log(formatter.makeUppercase('Tomek'));
+
+console.log(formatter.timesRun);
+console.log(formatter.getTimesRun());
+
+formatter.timesRun = 10;
+
+console.log(formatter.timesRun);
+console.log(formatter.getTimesRun());
