@@ -41,37 +41,65 @@ console.log(myModule._privateProperty); // is undefined protected by the module 
 // myModule._privateMethod(); // is TypeError protected by the module closure
 
 const formatter = (function () {
-  let timesRun = 0;
-
   const log = (message) => console.log(`[${Date.now()}] Logger: ${message}`);
-  const setTimesRun = () => {
-    log('Setting times run');
-    ++timesRun;
-  };
+  const timesRun = [];
+
+  // const setTimesRun = () => {
+  //   log('Setting times run');
+  //   ++timesRun;
+  // };
 
   const makeUppercase = (text) => {
     log('Making uppercase');
-    setTimesRun();
+    timesRun.push(null);
     return text.toUpperCase();
   };
 
-  const getTimesRun = () => timesRun;
+  // const getTimesRun = () => timesRun;
 
   return {
     makeUppercase,
     timesRun,
-    getTimesRun,
+    // getTimesRun,
   };
 })();
 
-console.log(formatter.makeUppercase('Tomek'));
-console.log(formatter.makeUppercase('Tomek'));
-console.log(formatter.makeUppercase('Tomek'));
+console.log(formatter.makeUppercase('tomek'));
+console.log(formatter.makeUppercase('tomek'));
+console.log(formatter.makeUppercase('tomek'));
+console.log(formatter.timesRun.length);
 
-console.log(formatter.timesRun);
-console.log(formatter.getTimesRun());
+formatter.timesRun.push(null);
+console.log(formatter.timesRun.length);
 
-formatter.timesRun = 10;
+console.log('\n');
 
-console.log(formatter.timesRun);
-console.log(formatter.getTimesRun());
+formatter.timesRun = [null, null, null, null, null, null];
+console.log(formatter.timesRun.length);
+
+console.log('\n');
+
+console.log(formatter.timesRun.length);
+
+// console.log(formatter.makeUppercase('Tomek'));
+// console.log(formatter.makeUppercase('Tomek'));
+// console.log(formatter.makeUppercase('Tomek'));
+
+// console.log(formatter.timesRun);
+// console.log(formatter.timesRun.length);
+// // console.log(formatter.getTimesRun());
+
+// formatter.timesRun = 10;
+
+// console.log(formatter.timesRun);
+// console.log(formatter.timesRun.length);
+// // console.log(formatter.getTimesRun());
+
+// console.log('\n');
+
+// const formatter2 = formatter;
+// console.log(formatter2.timesRun);
+// console.log(formatter.timesRun.length);
+// // console.log(formatter2.getTimesRun());
+
+// console.log('\n');
