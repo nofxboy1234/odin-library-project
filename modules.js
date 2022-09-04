@@ -129,3 +129,44 @@ console.log(user1);
 console.log(user2);
 console.log('\n');
 console.log(user1.fullName());
+
+const createObjectFromArray = ([key, value]) => ({
+  [key]: value,
+});
+
+createObjectFromArray(['name', 'John']); // { name: "John" }
+
+const a = ['name', 'John'];
+let key = '';
+let value = '';
+[key, value] = a;
+console.log(key);
+console.log(value);
+let b = [key];
+console.log(b);
+
+class User {
+  constructor({ firstName, lastName, email }) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+  }
+
+  fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+}
+
+const user3 = new User({
+  firstName: 'John',
+  lastName: 'Doe',
+  email: 'john@doe.com',
+});
+
+const user4 = new User({
+  firstName: 'Jane',
+  lastName: 'Doe',
+  email: 'jane@doe.com',
+});
+
+console.log(user3.fullName());
