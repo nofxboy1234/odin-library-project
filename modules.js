@@ -109,7 +109,7 @@ const createUser = ({ firstName, lastName, email }) => ({
   lastName,
   email,
   fullName() {
-    return `${this.firstName} ${this.lastName}`;
+    return `${firstName} ${lastName}`;
   },
 });
 
