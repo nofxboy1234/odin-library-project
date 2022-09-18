@@ -1,6 +1,6 @@
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
+function OldBookObjectConstructor(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -10,6 +10,21 @@ function Book(title, author, pages, read) {
     const info = `${this.title} by ${this.author}, ${this.pages} pages, ${status}`;
     return info;
   };
+}
+
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  info() {
+    let status = this.read ? 'has been read' : 'not read yet';
+    const info = `${this.title} by ${this.author}, ${this.pages} pages, ${status}`;
+    return info;
+  }
 }
 
 function addBookToLibrary(book) {
